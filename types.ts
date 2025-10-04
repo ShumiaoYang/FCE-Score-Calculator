@@ -1,4 +1,3 @@
-
 export interface RawScores {
   readingAndUseOfEnglish: {
     part1: string;
@@ -31,4 +30,11 @@ export interface CalculatedScores {
   overall: number;
   grade: string;
   cefr: string;
+}
+
+export interface ScoreRecord {
+  id: number;
+  date: string;
+  rawScores: RawScores;
+  results: CalculatedScores;
 }
