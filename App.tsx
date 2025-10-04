@@ -1,7 +1,6 @@
-
 import React, { useState, useCallback } from 'react';
 import type { RawScores, CalculatedScores } from './types';
-import { MAX_SCORES, CONVERSION_POINTS, ICONS, TOTAL_RAW_SCORES } from './constants';
+import { MAX_SCORES, CONVERSION_POINTS, ICONS, TOTAL_RAW_SCORES, RUE_POINTS_PER_ITEM } from './constants';
 import ScoreInput from './components/ScoreInput';
 import PaperCard from './components/PaperCard';
 import ResultDisplay from './components/ResultDisplay';
@@ -111,16 +110,22 @@ const App: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
           <div className="space-y-6">
             <PaperCard title="Reading & Use of English" icon={ICONS.reading}>
-                {Object.entries(MAX_SCORES.readingAndUseOfEnglish).map(([part, max], index) => (
-                    <ScoreInput 
-                        key={part} 
-                        id={`ruoe_${part}`}
-                        label={`Part ${index+1} (${max} ${part === 'part4' || part === 'part5' || part === 'part6' ? 'items' : 'marks'})`}
-                        max={max}
-                        value={rawScores.readingAndUseOfEnglish[part as keyof typeof rawScores.readingAndUseOfEnglish]}
-                        onChange={e => handleScoreChange('readingAndUseOfEnglish', part as keyof typeof rawScores.readingAndUseOfEnglish, e.target.value)}
-                    />
-                ))}
+                {Object.entries(MAX_SCORES.readingAndUseOfEnglish).map(([part, max], index) => {
+                    const partKey = part as keyof typeof rawScores.readingAndUseOfEnglish;
+                    const points = RUE_POINTS_PER_ITEM[partKey];
+                    const labelText = `Part ${index + 1} (${max} items, ${points} ${points > 1 ? 'points' : 'point'} each)`;
+
+                    return (
+                        <ScoreInput 
+                            key={part} 
+                            id={`ruoe_${part}`}
+                            label={labelText}
+                            max={max}
+                            value={rawScores.readingAndUseOfEnglish[partKey]}
+                            onChange={e => handleScoreChange('readingAndUseOfEnglish', partKey, e.target.value)}
+                        />
+                    );
+                })}
             </PaperCard>
             <PaperCard title="Writing" icon={ICONS.writing}>
                 <ScoreInput 

@@ -24,6 +24,16 @@ export const MAX_SCORES = {
   },
 };
 
+export const RUE_POINTS_PER_ITEM = {
+    part1: 1,
+    part2: 1,
+    part3: 1,
+    part4: 2,
+    part5: 2,
+    part6: 2,
+    part7: 1,
+};
+
 export const TOTAL_RAW_SCORES = {
     readingAndUseOfEnglish: 70,
     writing: 40,
