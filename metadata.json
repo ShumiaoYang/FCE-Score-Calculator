@@ -1,0 +1,5 @@
+{
+  "name": "Cambridge FCE Score Calculator",
+  "description": "An intuitive web application to calculate your Cambridge B2 First (FCE) exam score. Input the number of correct answers for each part of the exam to get an estimated Cambridge English Scale score, grade, and CEFR level.",
+  "requestFramePermissions": []
+}
